@@ -3,13 +3,16 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "pargs.h"
+
+int lobster(){
+  return 0;
+}
 
 int main(int argc, char * argv[]) {
-  int i = 0;
-  while(argv[i]){
-    printf("%s\n", argv[i]);
-    printf("\n");
-    i++;
-  }
+  char m[100];
+  fgets(m, sizeof(m), stdin);
+  char **args = pargs(m);
+  execvp(args[0],args);
   return 0;
 }

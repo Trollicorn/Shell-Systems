@@ -3,9 +3,9 @@
 #include <string.h>
 #include <unistd.h>
 
-char ** parse_args(char * line) {
+char ** pargs(char * line) {
 
-    char **arr = calloc(6, sizeof(char *));
+    char **arr = calloc(100, sizeof(char *));
 
     char *new_line = calloc(strlen(line),1);
     strcpy(new_line, line);
@@ -15,22 +15,4 @@ char ** parse_args(char * line) {
     }
 
     return arr;
-}
-
-int main(int argc, char * argv[]) {
-
-//    printf("\n[Testing parse_args with \"ls -a -l\"]\n");
-    char mmm[100];
-    strcpy(mmm," ");
-    int i = 1;
-    while(argv[i]){
-       strcat(mmm,argv[i]);
-       strcat(mmm," ");
-       ++i;
-    }
-    printf("%s\n", mmm);
-    char **args = parse_args(mmm);
-    execvp(argv[0],args);
-
-    return 0;
 }
