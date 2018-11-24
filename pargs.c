@@ -7,11 +7,8 @@ char ** pargs(char * line) {
 
     char **arr = calloc(100, sizeof(char *));
 
-    char *new_line = calloc(strlen(line),1);
-    strcpy(new_line, line);
-
-    for (int i = 0; new_line; i++) {
-        arr[i] = strsep(&new_line," ");
+    for (int i = 0; line; i++) {
+        arr[i] = strsep(&line," ");
     }
 
     return arr;
