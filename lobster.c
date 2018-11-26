@@ -39,10 +39,12 @@ int lobster(){
   }
   int *n;
   wait(n);
+  printf("\n<[Lobster]> ");
   return 0;
 }
 
 int main(int argc, char * argv[]) {
+  printf("\n<[Lobster]> ");
   while (1) {
     lobster();
   }
