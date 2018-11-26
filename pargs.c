@@ -6,10 +6,10 @@
 char ** pargs(char * line) {
 
     char **arr = calloc(100, sizeof(char *));
-
-    for (int i = 0; line; i++) {
+    int i = 0;
+    for (; line; i++) {
         arr[i] = strsep(&line," ");
     }
-
+    arr[i+1] = "\0";
     return arr;
 }

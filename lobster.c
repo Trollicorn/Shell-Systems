@@ -10,13 +10,20 @@ int lobster(){
 }
 
 int main(int argc, char * argv[]) {
-  char m[100] = { 0 };
+  char m[100];// = "ls";
   fgets(m, sizeof(m), stdin);
-  if(!strlen(m)){
-    m[strlen(m)-1] = "\0";
+
+  printf("%ld\n",strlen(m) );
+  if(strlen(m)){
+    m[strlen(m)-1] = NULL;
   }
-  printf("%s",m);
+//  printf("[%s]",m);
   char **args = pargs(m);
-  execvp("lobster",args);
+  int i = 0;
+  while(args[i]){
+    printf("[%s]\n", args[i]);
+    ++i;
+  }
+  execvp(args[0],args);
   return 0;
 }
