@@ -15,10 +15,20 @@ int lobster(){
   }else{
     return;
   }
+  char **args = pargs(m);
+  if (!strcmp(args[0],"cd")){
+    if (args[1]){
+      if (chdir(args[1])){
+        printf("ERROR OCCURED\n" );
+      }
+      return 0;
+    }
+    printf("NO ARGS GIVEN\n" );
+    return 0;
+  }
 //  printf("[%s]",m);
   int f = fork();
   if (!f){
-    char **args = pargs(m);
 /*  int i = 0;
   while(args[i]){
     printf("[%s]\n", args[i]);
