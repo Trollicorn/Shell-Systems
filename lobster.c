@@ -10,7 +10,7 @@ int lobster(){
 }
 
 int main(int argc, char * argv[]) {
-  char m[100];// = "ls";
+  char m[100] = { 0 };
   fgets(m, sizeof(m), stdin);
   if(!strlen(m)){
     m[strlen(m)-1] = "\0";
