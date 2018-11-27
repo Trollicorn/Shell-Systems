@@ -26,10 +26,13 @@ int lobster(){
     ++i;
   }
 */
+    if (!strcmp(args[0],"exit")){
+      exit(0);
+    }
     if (!strcmp(args[0],"cd")){
       if (args[1]){
         if (chdir(args[1])){
-          printf("ERROR OCCURED\n" );
+          printf("Directory does not exist" );
         }
         char cwd[PATH_MAX];
       //  printf("passed\n" );
@@ -38,7 +41,10 @@ int lobster(){
 
         return 0;
       }
-      printf("NO ARGS GIVEN\n" );
+      chdir(getenv("HOME"));
+      char cwd[PATH_MAX];
+      getcwd(cwd,sizeof(cwd));
+      printf("\n<[Lobster:%s]>",cwd);
       return 0;
     }
     execvp(args[0],args);
