@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 
 #include "pargs.h"
 
@@ -16,16 +17,6 @@ int lobster(){
     return;
   }
   char **args = pargs(m);
-  if (!strcmp(args[0],"cd")){
-    if (args[1]){
-      if (chdir(args[1])){
-        printf("ERROR OCCURED\n" );
-      }
-      return 0;
-    }
-    printf("NO ARGS GIVEN\n" );
-    return 0;
-  }
 //  printf("[%s]",m);
   int f = fork();
   if (!f){
@@ -35,16 +26,35 @@ int lobster(){
     ++i;
   }
 */
+    if (!strcmp(args[0],"cd")){
+      if (args[1]){
+        if (chdir(args[1])){
+          printf("ERROR OCCURED\n" );
+        }
+        char cwd[PATH_MAX];
+      //  printf("passed\n" );
+        getcwd(cwd,sizeof(cwd));
+        printf("\n<[Lobster:%s]>",cwd);
+
+        return 0;
+      }
+      printf("NO ARGS GIVEN\n" );
+      return 0;
+    }
     execvp(args[0],args);
   }
   int *n;
   wait(n);
-  printf("\n<[Lobster]> ");
+  char cwd[PATH_MAX];
+  getcwd(cwd,sizeof(cwd));
+  printf("\n<[Lobster:%s]>",cwd);
   return 0;
 }
 
 int main(int argc, char * argv[]) {
-  printf("\n<[Lobster]> ");
+char cwd[PATH_MAX];
+getcwd(cwd,sizeof(cwd));
+printf("\n<[Lobster:%s]>",cwd);
   while (1) {
     lobster();
   }
