@@ -15,18 +15,17 @@ int lobster(){
   if(strlen(m)){
     m[strlen(m)-1] = NULL;
   }else{
-    return;
+    return 0;
   }
-  char **args = pargs(m);
-//  printf("[%s]",m);
+  char **args = pargs(m," ");
   int f = fork();
   if (!f){
-/*  int i = 0;
+  int i = 0;
   while(args[i]){
-    printf("[%s]\n", args[i]);
+    printf("%d:[%s]\n", i,args[i]);
     ++i;
   }
-*/
+
     if (!strcmp(args[0],"exit")){
       exit(1);
     }

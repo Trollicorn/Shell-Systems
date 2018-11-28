@@ -3,4 +3,4 @@
 #include <string.h>
 #include <unistd.h>
 
-char ** pargs(char * line);
+char ** pargs(char * line, char * delim);
