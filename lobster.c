@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+#include <sys/wait.h>
 
 #include "pargs.h"
 
@@ -27,30 +28,34 @@ int lobster(){
   }
 */
     if (!strcmp(args[0],"exit")){
-      exit(0);
+      exit(1);
     }
     if (!strcmp(args[0],"cd")){
-      if (args[1]){
-        if (chdir(args[1])){
-          printf("Directory does not exist" );
-        }
-        char cwd[PATH_MAX];
-      //  printf("passed\n" );
-        getcwd(cwd,sizeof(cwd));
-        printf("\n<[Lobster:%s]>",cwd);
-
-        return 0;
+      exit(2);
+    }
+    execvp(args[0],args);
+  }
+  int n;
+  wait(&n);
+  if (WEXITSTATUS(n)==1){
+    exit(0);
+  }
+  else if(WEXITSTATUS(n)==2){
+    if (args[1]){
+      if (chdir(args[1])){
+        printf("Directory does not exist" );
       }
-      chdir(getenv("HOME"));
       char cwd[PATH_MAX];
       getcwd(cwd,sizeof(cwd));
       printf("\n<[Lobster:%s]>",cwd);
       return 0;
     }
-    execvp(args[0],args);
+    chdir(getenv("HOME"));
+    char cwd[PATH_MAX];
+    getcwd(cwd,sizeof(cwd));
+    printf("\n<[Lobster:%s]>",cwd);
+    return 0;
   }
-  int *n;
-  wait(n);
   char cwd[PATH_MAX];
   getcwd(cwd,sizeof(cwd));
   printf("\n<[Lobster:%s]>",cwd);
