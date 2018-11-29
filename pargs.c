@@ -9,6 +9,9 @@ char ** pargs(char * line, char * delim) {
     int i = 0;
     for (; line; i++) {
         arr[i] = strsep(&line,delim);
+        while (!strcmp(line[0],delim)) { //FIX
+          arr[i] = strsep(&line, delim); //FIX
+        }                                //FIX
     }
     arr[i+1] = "\0";
     return arr;

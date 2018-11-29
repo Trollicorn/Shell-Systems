@@ -8,4 +8,4 @@ pargs.o: pargs.h pargs.c
 	gcc -c pargs.c
 
 run:
-	./lobster k
+	./lobster
