@@ -11,7 +11,7 @@ char ** pargs(char * line, char * delim) {
 
     char *end;
     end = line + strlen(line) - 1;
-    while (end > line && end[0] == ' ') {
+    while (end > line && end[0] == delim[0]) {
       end--;
     }
     end[1] = '\0';
