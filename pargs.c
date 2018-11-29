@@ -13,18 +13,7 @@ char ** pargs(char * line, char * delim) {
           --i;
           continue;
         }
-
         arr[i] = strsep(&line,delim);
-
-
-
-
-
-      /*
-        while (line[0]==delim) { //FIX
-          arr[i] = strsep(&line, delim); //FIX
-        }
-        */                                //FIX
     }
     arr[i+1] = "\0";
     return arr;
