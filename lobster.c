@@ -37,7 +37,6 @@ int lobster(){
       exit(2);
     }
 
-    //char **args =
 
     execvp(args[0],args);
   }
