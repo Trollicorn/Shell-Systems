@@ -8,10 +8,23 @@ char ** pargs(char * line, char * delim) {
     char **arr = calloc(100, sizeof(char *));
     int i = 0;
     for (; line; i++) {
+        if (line[0]==' '){
+          arr[i] = strsep(&line,delim);
+          --i;
+          continue;
+        }
+
         arr[i] = strsep(&line,delim);
-        while (!strcmp(line[0],delim)) { //FIX
+
+
+
+
+
+      /*
+        while (line[0]==delim) { //FIX
           arr[i] = strsep(&line, delim); //FIX
-        }                                //FIX
+        }
+        */                                //FIX
     }
     arr[i+1] = "\0";
     return arr;

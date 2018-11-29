@@ -22,11 +22,13 @@ int lobster(){
 
   int f = fork();
   if (!f){
-  /*  int i = 0;
+//       /*
+    int i = 0;
     while(args[i]){
       printf("%d:[%s]\n", i,args[i]);
       ++i;
-    }*/
+    }
+//    */
 
     if (!strcmp(args[0],"exit")){
       exit(1);
