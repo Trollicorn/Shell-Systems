@@ -7,6 +7,14 @@
 
 #include "pargs.h"
 
+void prompt(){
+  char cwd[PATH_MAX];
+  getcwd(cwd,sizeof(cwd));
+  printf("\n<[Lobster:%s]>",cwd);
+}
+
+
+
 int lobster(){
   char m[LINE_MAX];
   fgets(m, sizeof(m), stdin);
@@ -17,60 +25,75 @@ int lobster(){
   else{
     return 0;
   }
-
-  char **args = pargs(m," ");
-
-  int f = fork();
-  if (!f){
-//       /*
-    int i = 0;
-    while(args[i]){
-      printf("%d:[%s]\n", i,args[i]);
-      ++i;
-    }
-//    */
-
-    if (!strcmp(args[0],"exit")){
-      exit(1);
-    }
-    if (!strcmp(args[0],"cd")){
-      exit(2);
-    }
-
-
-    execvp(args[0],args);
+  char **comms = pargs(m,";");
+         /* PARSE PRINTER
+  int ss = 0;
+  while(comms[ss]){
+    printf("%d:[%s]\n", ss,comms[ss]);
+    ++ss;
   }
-  int n;
-  wait(&n);
-  if (WEXITSTATUS(n)==1){ //exit
-    exit(0);
-  }
-  else if(WEXITSTATUS(n)==2){ //cd
-    if (args[1]){
-      if (chdir(args[1])){
-        printf("Directory does not exist" );
+      */
+  for (int n=0;comms[n];++n){
+//    printf("N: %d\n",n );
+    char **args = pargs(comms[n]," ");
+
+    int f = fork();
+    if (!f){
+             /* PARSE PRINTER
+      int i = 0;
+      while(args[i]){
+        printf("%d:[%s]\n", i,args[i]);
+        ++i;
       }
-      char cwd[PATH_MAX];
-      getcwd(cwd,sizeof(cwd));
-      printf("\n<[Lobster:%s]>",cwd);
+          */
+
+      if (!strcmp(args[0],"exit")){
+        exit(1);
+      }
+      if (!strcmp(args[0],"cd")){
+        exit(2);
+      }
+
+
+      execvp(args[0],args);
+    }
+  //  printf("%d got here3\n",n );
+    int stat;
+    wait(&stat);
+    if (WEXITSTATUS(stat)==1){ //exit
+      exit(0);
+    }
+    else if(WEXITSTATUS(stat)==2){ //cd
+      if (args[1]){
+        if (chdir(args[1])){
+          printf("Directory does not exist" );
+        }
+        if (comms[n+1]){
+          continue;
+        }
+        prompt();
+        return 0;
+      }
+      chdir(getenv("HOME"));
+      if (comms[n+1]){
+        continue;
+      }
+      prompt();
       return 0;
     }
-    chdir(getenv("HOME"));
-    char cwd[PATH_MAX];
-    getcwd(cwd,sizeof(cwd));
-    printf("\n<[Lobster:%s]>",cwd);
+//    printf("%d got here2\n",n);
+    if (comms[n+1]){
+  //    printf("%d:%s\n", n,comms[n+1]);
+      continue;
+    }
+//    printf("%d got here\n",n);
+    prompt();
     return 0;
   }
-  char cwd[PATH_MAX];
-  getcwd(cwd,sizeof(cwd));
-  printf("\n<[Lobster:%s]>",cwd);
-  return 0;
 }
 
 int main(int argc, char * argv[]) {
-  char cwd[PATH_MAX];
-  getcwd(cwd,sizeof(cwd));
-  printf("\n<[Lobster:%s]>",cwd);
+  prompt();
   while (1) {
     lobster();
   }
