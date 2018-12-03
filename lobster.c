@@ -46,14 +46,24 @@ int lobster(){
         ++i;
       }
           */
-
       if (!strcmp(args[0],"exit")){
         exit(1);
       }
       if (!strcmp(args[0],"cd")){
         exit(2);
       }
-
+      int backin = dup(STDIN_FILENO); //multiply std
+      int backout = dup(STDOUT_FILENO);
+      for (int i = 0; args[i]; ++i){
+        if (!strcmp(args[i], "<")){
+          //COPY DOWN
+        }
+        if (!strcmp(args[i],">")){
+          int fd = open(args[i+1], O_WRONLY | O_CREAT, 0644);
+          dup2(fd, STDOUT_FILENO);
+          ///WORK ------------------------------------------------------------------------------------
+        }
+      }
 
       execvp(args[0],args);
     }

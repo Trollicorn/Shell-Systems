@@ -34,8 +34,8 @@ char ** pargs(char * line, char * delim) {
   //    printf("{%s}\n",line );
 
   int i = 0;
-
   for (; line; i++) {
+
     if (line[0]==delim[0]){
       arr[i] = strsep(&line,delim);
       --i;
