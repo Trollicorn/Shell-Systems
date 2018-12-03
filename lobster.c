@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+#include <signal.h>
 #include <sys/wait.h>
 
 #include "pargs.h"
@@ -12,7 +13,6 @@ void prompt(){
   getcwd(cwd,sizeof(cwd));
   printf("\n<[Lobster:%s]>",cwd);
 }
-
 
 
 int lobster(){
