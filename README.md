@@ -25,22 +25,22 @@ by Mohammed Uddin
   * If command isn't found, nothing is returned
 
 ### Files and Function Headers
-pargs.c
-  Does parsing stuff
-  char ** pargs (char * line, char * delim);
-    Input:
-      char * line is the line to be parsed through
-      char * delim is the delimiter that will be used to parse through line
-    Return:
-      Array of strings with each string being the parts of line seperated by delim
-lobster.c
-  Does everything else
-  void prompt();
-    Prints out the command line prompt
-  int lobster();
-    One iteration of the shell. Takes input given to the shell and makes it do the stuff it's supposed to do.
-beetle.c
-  The loop file
-    int main();
-      Basically calls lobster() forever until told to exit.
+* pargs.c
+  * Does parsing stuff
+  * char ** pargs (char * line, char * delim);
+    * Input:
+      * char * line is the line to be parsed through
+      * char * delim is the delimiter that will be used to parse through line
+    * Return:
+      * Array of strings with each string being the parts of line seperated by delim
+* lobster.c
+  * Does everything else
+  * void prompt();
+    * Prints out the command line prompt
+  * int lobster();
+    * One iteration of the shell. Takes input given to the shell and makes it do the stuff it's supposed to do.
+* beetle.c
+  * The loop file
+    * int main();
+      * Basically calls lobster() forever until told to exit.
     
