@@ -13,7 +13,7 @@
 void prompt(){
   char cwd[PATH_MAX];
   getcwd(cwd,sizeof(cwd));
-  printf("\n<[Lobster:%s]>",cwd);
+  printf("\n<[Carapace:%s]>",cwd);
 }
 
 
@@ -25,7 +25,7 @@ int lobster(){
   int backout = dup(STDOUT_FILENO);
 
   if(strlen(m)){
-    m[strlen(m)-1] = NULL;
+    m[strlen(m)-1] = '\0';
   }
   else{
     return 0;
@@ -139,10 +139,3 @@ int lobster(){
   }
 }
 
-int main(int argc, char * argv[]) {
-  prompt();
-  while (1) {
-    lobster();
-  }
-  return 0;
-}

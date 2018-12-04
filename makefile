@@ -1,11 +1,14 @@
-all: lobster.o pargs.o
-	gcc -o lobster lobster.o pargs.o
-
-lobster.o: pargs.h lobster.c
-	gcc -c lobster.c
+all: pargs.o lobster.o beatle.o
+	gcc -o carapace pargs.o lobster.o beatle.o 
 
 pargs.o: pargs.h pargs.c
 	gcc -c pargs.c
 
+lobster.o: pargs.h lobster.h lobster.c
+	gcc -c lobster.c
+
+beatle.o: pargs.h lobster.h beatle.c
+	gcc -c beatle.c
+
 run:
-	./lobster
+	./carapace

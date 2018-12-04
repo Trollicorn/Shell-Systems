@@ -3,23 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-int hasThing(char *s, int left){
-  char thing;
-  if (left){
-    thing = '<';
-  }
-  else{
-    thing = '>';
-  }
-  for (int i = 0; s[i]; ++i){
-    if (s[i] == thing){
-      return 1;
-    }
-  }
-  return 0;
-}
-
-
 char ** pargs(char * line, char * delim) {
 
   char **arr = calloc(100, sizeof(char *));
