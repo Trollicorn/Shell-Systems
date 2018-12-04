@@ -59,22 +59,30 @@ int lobster(){
       }
       for (int i = 0; args[i]; ++i){
         if (!strcmp(args[i], "<")){
-          int fd = open(args[i+i], O_RDONLY, 0644);
+          int fd = open(args[i+1], O_RDONLY, 0644);
           if (fd == -1){
 	    printf("%s\n",strerror(errno));
 	  }
           dup2(fd, STDIN_FILENO);
-          args[i] = NULL; 
+          args[i] = NULL;
         }
-        if (!strcmp(args[i],">")){
-          int fd = open(args[i+1], O_WRONLY | O_CREAT, 0644);
+        else if (!strcmp(args[i],">")){
+	 int fd = open(args[i+1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
           if (fd == -1){
 	    printf("%s\n",strerror(errno));
 	  }
           dup2(fd, STDOUT_FILENO);
           args[i] = NULL;
-          ///WORK ------------------------------------------------------------------------------------
         }
+        else if (!strcmp(args[i],">>")){
+          int fd = open(args[i+1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+          if (fd == -1){
+            printf("%s\n",strerror(errno));
+          }
+          dup2(fd, STDOUT_FILENO);
+          args[i] = NULL;
+        }
+
       }
 
       execvp(args[0],args);
@@ -85,6 +93,7 @@ int lobster(){
     wait(&stat);
     dup2(backin, STDIN_FILENO);
     dup2(backout, STDOUT_FILENO);
+
     if (WEXITSTATUS(stat)==1){ //exit
       exit(0);
     }
