@@ -5,6 +5,7 @@
 #include "pargs.h"
 
 
+//this is called beetle not because of the beetle shell, but because of the beatles
 int main() {
   prompt();
   while (1) {
