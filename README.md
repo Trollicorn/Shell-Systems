@@ -2,11 +2,14 @@
 by Mohammed Uddin
 
 ### Features
+  * "make" gets everything ready and "make run" runs the shell
   * Can give arguments to commands
   * Can give multiple commands seperated by semicolon
   * Spaces in the beginning don't matter (other whitespace probably matters)
   * Spaces at the end don't matter (other whitespace probably matters)
   * Multiple spaces between arguments don't matter (other whitespace probably matters)
+  * cd and exit work
+  * cd without any arguments works
   * Redirect using '<', '>', and '>>' works
   * Multiple redirections SHOULD work (I may have missed some test cases)
   * Piping works (one pipe per command seperated by semicolon)
@@ -17,6 +20,7 @@ by Mohammed Uddin
   * Tried to implement redirect using '2>', '2>>', '&>', and '&>>', but didn't finish.
 
 ### Bugs
+  * Compiling lobster.c (or using make) prints out a warning which I never got around to fixing.
   * One pipe only per command
   * Spaces inside quotations are parsed through
   * Semicolons inside quotations are parsed through
