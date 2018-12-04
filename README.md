@@ -23,6 +23,7 @@ by Mohammed Uddin
   * Multiple semicolons could be right next to each other like ";;;" but would be treated as one semicolon
   * A semicolon as the first thing in the input will not return an error
   * If command isn't found, nothing is returned
+  * Virtual environment is not shown when activated
 
 ### Files and Function Headers
 * pargs.c
