@@ -5,6 +5,8 @@
 #include <limits.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <fcntl.h>
+#include <errno.h>
 
 #include "pargs.h"
 
@@ -56,16 +58,23 @@ int lobster(){
       int backout = dup(STDOUT_FILENO);
       for (int i = 0; args[i]; ++i){
         if (!strcmp(args[i], "<")){
-          //COPY DOWN
+          int fd = open(args[i+i], O_RDONLY, 0644);
+          if (fd == -1){
+	    printf("%s\n",strerror(errno));
+	  }
         }
         if (!strcmp(args[i],">")){
           int fd = open(args[i+1], O_WRONLY | O_CREAT, 0644);
+          if (fd == -1){
+	    printf("%s\n",strerror(errno));
+	  }
           dup2(fd, STDOUT_FILENO);
           ///WORK ------------------------------------------------------------------------------------
         }
       }
 
       execvp(args[0],args);
+      exit(0);
     }
   //  printf("%d got here3\n",n );
     int stat;
