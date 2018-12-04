@@ -82,6 +82,19 @@ int lobster(){
           dup2(fd, STDOUT_FILENO);
           args[i] = NULL;
         }
+        else if (!strcmp(args[i],"|")){    //if this breaks, call a plumber
+	  int fd[2];
+          pipe(fd);
+          int p = fork();   //a grandchild!
+          args[i] = NULL;
+	  if (!p){
+            dup2(fd[1],STDOUT_FILENO);  //write end now takes from stdout
+            execvp(args[0],args);     //running away from death
+          }
+          dup2(fd[0],STDIN_FILENO); //read from readend instead of stdin now
+          close(fd[1]);            //no more writing
+	  execvp(args[i + 1], &args[i +1]);
+	}
 
       }
 
