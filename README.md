@@ -13,6 +13,7 @@ by Mohammed Uddin
   * Redirect using '<', '>', and '>>' works
   * Multiple redirections SHOULD work (I may have missed some test cases)
   * Piping works (one pipe per command seperated by semicolon)
+  * Error messages when command not found.
 
 ### Attempted
   * Tried to catch SIGINT signal to stop Ctrl + C, but that messed with how the child processes were exiting and I didn't have enough time to finish it.
@@ -28,6 +29,7 @@ by Mohammed Uddin
   * A semicolon as the first thing in the input will not return an error
   * If command isn't found, nothing is returned
   * Virtual environment is not shown when activated
+  * Ctrl + C closes the shell
 
 ### Files and Function Headers
 * pargs.c
