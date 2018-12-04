@@ -16,6 +16,9 @@ void prompt(){
   printf("\n<[Carapace:%s]>",cwd);
 }
 
+static void scorpion(int sig1, int sig2){
+  return; 
+}
 
 int lobster(){
   char m[LINE_MAX];
@@ -106,6 +109,7 @@ int lobster(){
     }
   //  printf("%d got here3\n",n );
     int stat;
+    scorpion(SIG_INT, SIG_IGN);
     wait(&stat);
     dup2(backin, STDIN_FILENO);
     dup2(backout, STDOUT_FILENO);

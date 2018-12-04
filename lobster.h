@@ -13,4 +13,6 @@
 
 void prompt();
 
+static void scorpion(int sig1,int sig2);
+
 int lobster();
