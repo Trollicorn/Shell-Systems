@@ -90,15 +90,18 @@ int lobster(){
 	  if (!p){
             dup2(fd[1],STDOUT_FILENO);  //write end now takes from stdout
             execvp(args[0],args);     //running away from death
+            printf("%s\n", strerror(errno));
           }
           dup2(fd[0],STDIN_FILENO); //read from readend instead of stdin now
           close(fd[1]);            //no more writing
 	  execvp(args[i + 1], &args[i +1]);
+          printf("%s\n", strerror(errno));
 	}
 
       }
 
       execvp(args[0],args);
+      printf("%s\n", strerror(errno));
       exit(0);
     }
   //  printf("%d got here3\n",n );
@@ -113,7 +116,7 @@ int lobster(){
     else if(WEXITSTATUS(stat)==2){ //cd
       if (args[1]){
         if (chdir(args[1])){
-          printf("Directory does not exist" );
+          printf("%s\n", strerror(errno));
         }
         if (comms[n+1]){
           continue;
