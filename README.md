@@ -4,11 +4,11 @@ by Mohammed Uddin
 ### Features
   * Can give arguments to commands
   * Can give multiple commands seperated by semicolon
-  * Spaces in the beginning don't matter (other whitespace might matter)
-  * Spaces at the end don't matter (other whitespace might matter)
-  * Multiple spaces between arguments don't matter (other whitespace might matter)
+  * Spaces in the beginning don't matter (other whitespace probably matters)
+  * Spaces at the end don't matter (other whitespace probably matters)
+  * Multiple spaces between arguments don't matter (other whitespace probably matters)
   * Redirect using '<', '>', and '>>' works
-  * Multiple repirections SHOULD work (I may have missed some test cases)
+  * Multiple redirections SHOULD work (I may have missed some test cases)
   * Piping works (one pipe per command seperated by semicolon)
 
 ### Attempted
