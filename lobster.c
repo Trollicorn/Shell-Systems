@@ -21,6 +21,9 @@ int lobster(){
   char m[LINE_MAX];
   fgets(m, sizeof(m), stdin);
 
+  int backin = dup(STDIN_FILENO); //multiply std
+  int backout = dup(STDOUT_FILENO);
+
   if(strlen(m)){
     m[strlen(m)-1] = NULL;
   }
@@ -54,14 +57,14 @@ int lobster(){
       if (!strcmp(args[0],"cd")){
         exit(2);
       }
-      int backin = dup(STDIN_FILENO); //multiply std
-      int backout = dup(STDOUT_FILENO);
       for (int i = 0; args[i]; ++i){
         if (!strcmp(args[i], "<")){
           int fd = open(args[i+i], O_RDONLY, 0644);
           if (fd == -1){
 	    printf("%s\n",strerror(errno));
 	  }
+          dup2(fd, STDIN_FILENO);
+          args[i] = NULL; 
         }
         if (!strcmp(args[i],">")){
           int fd = open(args[i+1], O_WRONLY | O_CREAT, 0644);
@@ -69,6 +72,7 @@ int lobster(){
 	    printf("%s\n",strerror(errno));
 	  }
           dup2(fd, STDOUT_FILENO);
+          args[i] = NULL;
           ///WORK ------------------------------------------------------------------------------------
         }
       }
@@ -79,6 +83,8 @@ int lobster(){
   //  printf("%d got here3\n",n );
     int stat;
     wait(&stat);
+    dup2(backin, STDIN_FILENO);
+    dup2(backout, STDOUT_FILENO);
     if (WEXITSTATUS(stat)==1){ //exit
       exit(0);
     }
